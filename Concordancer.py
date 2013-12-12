@@ -2,7 +2,7 @@
 print "Start"
 import re
 
-FileName = r'C:\Users\reggert\Documents\My Box Files\Olin\Research\Groupwork Project\Transcription\Plaintext Transcripts\Team I.txt'
+FileName = r'Insert filepath'
 
 textfile = open(FileName)
 
