@@ -2,7 +2,7 @@
 print "Start"
 import re
 
-FileName = r'Insert filepath'
+FileName = r'spacelessts.txt'
 
 textfile = open(FileName)
 
@@ -10,7 +10,7 @@ data = textfile.read()
 
 textfile.close()
 
-SearchTerm = 'yeah'
+SearchTerm = '/um/'
 
 for matchstr in re.findall(SearchTerm, data):
     print matchstr
