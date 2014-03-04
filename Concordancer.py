@@ -10,7 +10,7 @@ data = textfile.read()
 
 textfile.close()
 
-SearchTerm = '/um/'
+SearchTerm = '.(30)a*(30)'
 
 for matchstr in re.findall(SearchTerm, data):
     print matchstr
