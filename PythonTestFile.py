@@ -1,4 +1,5 @@
 # PythonTestFile.py
 
+import string
 
-print range(10)
+print string.ascii_letters
