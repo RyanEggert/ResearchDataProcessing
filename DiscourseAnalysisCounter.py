@@ -4,7 +4,7 @@ import re  # Import regular expressions module
 #  Be sure to replace apostrophe character with ' in all text files before proceeding.
 
 
-##################FUNCTION-DEFINITION##################
+##################FUNCTION-DEFINITIONS##################
 
 
 def Search_name_for(TeamNumber, PersonName, SearchTerm, DataToSearch):
@@ -32,7 +32,7 @@ def Search_name_for(TeamNumber, PersonName, SearchTerm, DataToSearch):
 
     textfile.close()
     
-    nopuncdata = data.translate(None, ";',.? !")  # Deletes the characters enclosed in double quotes from data and saves as nopuncdata
+    nopuncdata = data.translate(None, ";',.? !-")  # Deletes the characters enclosed in double quotes from data and saves as nopuncdata
     nopunclinedata = nopuncdata.replace('\r', '').replace('\n','')  # Remove carriage returns and newline characters
 
     return len(re.findall(SearchTerm, eval(DataToSearch)))  # return total number of found instances of SearchTerm
@@ -41,15 +41,34 @@ def Search_name_for(TeamNumber, PersonName, SearchTerm, DataToSearch):
     #     print matchstr
     # above is from concordancer program. Something of this form can be used to display context of identified areas
 
-#########################BEGIN#########################
 
 
-toFind = '(?i)/like/|/um/|/ah/|/well/|/so/' # Regular Expression input. (?i) is case insensitive
+def LoopThroughTeam(toFind, inWhichData, teamMembers, categoryTitle):
+    print categoryTitle
 
-TeamMembers = ['Eric Abramson', 'John Powers', 'Ruth Thompson', 'Mary Gothel', 'Mark Castellani']  # List of team members. Change to reflect current team
-
-for x in range(len(TeamMembers)):
+    for x in range(len(teamMembers)):
     
-    Count = Search_name_for(1, TeamMembers[x], toFind, 'nopunclinedata')  # Choose data, nopuncdata, or nopunclinedata
-    
-    print TeamMembers[x] + '|' + str(Count)  # Output counted and labeled data for copying directly into MS Excel
+        Count = Search_name_for(1, teamMembers[x], toFind, inWhichData)  # Choose data, nopuncdata, or nopunclinedata
+        
+        print teamMembers[x] + '|' + str(Count)  # Output counted and labeled data for copying directly into MS Excel
+    print 2*'\n'  
+
+
+#########################BEGIN##########################
+
+to_Find = {
+    "Number of MUs": ['/', 'nopuncdata'],
+    "Meaningless MUs": ['(?i)/like/|/um/|/ah/|/well/|/so/','nopunclinedata'], 
+    "I think": ['Ithink|Ithought|Ihadthought','nopunclinedata'],
+    "I": [' I | I\'','data'],
+    "we": ['(?i) we | we\'','data'],
+    "Questions": ['\?','data'], 
+    "Agreement": ['(?i)yes|yeap|yeah|yup|uhhuh','nopuncdata'],
+    "Disagreement": ['(?i)no/|no |nope', 'data'],
+    }
+
+
+Team_Members = ['Eric Abramson', 'John Powers', 'Ruth Thompson', 'Mary Gothel', 'Mark Castellani']  # List of team members. Change to reflect current team
+
+for key in to_Find:
+    LoopThroughTeam(to_Find[key][0], to_Find[key][1], Team_Members, key)
