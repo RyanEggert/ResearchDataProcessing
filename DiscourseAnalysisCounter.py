@@ -43,12 +43,12 @@ def Search_name_for(TeamNumber, PersonName, SearchTerm, DataToSearch):
 
 
 
-def LoopThroughTeam(toFind, inWhichData, teamMembers, categoryTitle):
+def LoopThroughTeam(toFind, inWhichData, teamNum, teamMembers, categoryTitle):
     print categoryTitle
 
     for x in range(len(teamMembers)):
     
-        Count = Search_name_for(1, teamMembers[x], toFind, inWhichData)  # Choose data, nopuncdata, or nopunclinedata
+        Count = Search_name_for(teamNum, teamMembers[x], toFind, inWhichData)  # Choose data, nopuncdata, or nopunclinedata
         
         print teamMembers[x] + '|' + str(Count)  # Output counted and labeled data for copying directly into MS Excel
     print 2*'\n'  
@@ -71,4 +71,4 @@ to_Find = {
 Team_Members = ['Eric Abramson', 'John Powers', 'Ruth Thompson', 'Mary Gothel', 'Mark Castellani']  # List of team members. Change to reflect current team
 
 for key in to_Find:
-    LoopThroughTeam(to_Find[key][0], to_Find[key][1], Team_Members, key)
+    LoopThroughTeam(to_Find[key][0], to_Find[key][1], 1, Team_Members, key)
