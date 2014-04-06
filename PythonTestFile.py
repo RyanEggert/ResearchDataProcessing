@@ -17,4 +17,6 @@ for key in to_Find:
 
 FileName = r'C:/Users/reggert/Dropbox/Discourse Files 2013-2014/Analysis/Team ' + '1' + '/SinglePersonTexts/'
 
-print os.listdir(FileName)
+Files = os.listdir(FileName)
+
+print Files
